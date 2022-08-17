@@ -1,11 +1,22 @@
 import java.util.*;
 import java.util.stream.*;
+import java.util.function.Function;
 import java.io.*;
 
+/* Génération javadoc avec schéma mode d'oxygène
+{@link package.class#member  label}
+<ul>
+<li> test1
+<li> test2
+</ul>
+
+javadoc pour une valeur d'énuméré{@link SpotModes#uas}:*/
 class Solution {
 
   /* declarations */
-static String myString = "test";
+  static String myString = "test";
+
+ //Set<Component>s = new HashSet<>(Arrays.asList(ev1.getF().getComponents()));
   
   static Map<Character, State> myMap = new HashMap<>();
 
@@ -20,7 +31,7 @@ static String myString = "test";
      { "sp", " " }, { "bS", "\\" }, { "sQ", "'" }, { "nl", "\\n" }})
      .collect(Collectors.toMap(data -> (String) data[0], data -> (String) data[1]));
 
-  static int myArray[] = { 1, 2, 3, 4, 5 };
+static int myArray[] = { 1, 2, 3, 4, 5 };
 
   //TODO map.of etc
   // TODO init de map
@@ -56,18 +67,30 @@ static String myString = "test";
     Map<Boolean, List<Integer>> passedFailedMap = Stream.of(49, 58, 76, 82, 88, 90)
         .collect(Collectors.partitioningBy(i -> i > 60));
 
+    //filtrer par objets non null
+    String resultat = Stream.of( null, null, "valeur defaut").filter( Objects::nonNull ).findFirst().get();
+    
   /* String, characters */
 
+  //stringMatch compliqué
+    
     // init from A to Z
     Stream.iterate('a', i -> ++i).limit(26).forEach(System.out::println);
 
-String resultat = Stream.of( null, null, "valeur defaut").filter( Objects::nonNull ).findFirst().get();
+    //filtrer par objets non null
+    String resultat3 = Stream.of( null, null, "valeur defaut").filter( Objects::nonNull ).findFirst().get();
     
     //repeat
     String stringABC="abc";
     int count=3;
     System.out.println("stringABC :"+stringABC.repeat(count));
     //TODO mettre un assert
+
+   int charNb = 3;
+  String answer = "";
+    // TODO faire la translation map
+     //IntStream.rangeClosed(1, charNb).forEach(i -> answer += translationMap.getOrDefault(seq,seq));
+
     
     //Arrays to char puis list<Character>
     List<Character> charList = myString
@@ -103,6 +126,12 @@ String resultat = Stream.of( null, null, "valeur defaut").filter( Objects::nonNu
     }
     System.out.println(count2);
   }
+
+  /* TODO javadoc */
+  public <T, R> Function<T, Stream<R>> select(Class<R> clazz) {
+    return e -> clazz.isInstance(e) ? Stream.of(clazz.cast(e)) : null;
+  }
+  
 }
 
 class State {
@@ -126,10 +155,7 @@ Set<Text> childrenToRemove = group.getChildren()
     // ...
     .collect(Collectors.toSet());
 
-Instead of using
-AN ANONYMOUS CLASS
-you can use
-A LAMBDA EXPRESSION
+Instead of using AN ANONYMOUS CLASS you can use A LAMBDA EXPRESSION
 And if this just calls one method, you can use
 A METHOD REFERENCE mais c'est juste du sucre syntaxique?
 DSL comme sucre syntaxique?*/
