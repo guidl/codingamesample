@@ -29,8 +29,7 @@ public enum Blah {
         return this.text;
     }
 
-
-plutôt le value of? oui senseible à la casse 
+ /* car le value of est sensible à la casse */
     public static Blah fromString(String text) {
         for (Blah b : Blah.values()) {
             if (b.text.equalsIgnoreCase(text)) {
