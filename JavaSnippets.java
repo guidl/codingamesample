@@ -10,14 +10,24 @@ import java.io.*;
 <li> test2
 </ul>
 
+Règles
+Instead of using AN ANONYMOUS CLASS you can use A LAMBDA EXPRESSION
+And if this just calls one method, you can use A METHOD REFERENCE mais c'est juste du sucre syntaxique? DSL comme sucre syntaxique?*/
+
 javadoc pour une valeur d'énuméré{@link SpotModes#uas}:*/
 class Solution {
 
-  /* declarations */
+  /* 0 declarations */
   static String myString = "test";
 
- //Set<Component>s = new HashSet<>(Arrays.asList(ev1.getF().getComponents()));
+  //ARRAY INIT 
+  // les dimensions d'une tableau ne bougent pas 
+  //refaire la tactique du bouncing bunny
+  static int myArray[] = { 1, 2, 3, 4, 5 };
   
+ //Set<Component>s = new HashSet<>(Arrays.asList(ev1.getF().getComponents()));
+
+  // MAP INIT
   static Map<Character, State> myMap = new HashMap<>();
 
   private static final Map<String, String> ABBREVIATIONS = Map.of(
@@ -31,14 +41,9 @@ class Solution {
      { "sp", " " }, { "bS", "\\" }, { "sQ", "'" }, { "nl", "\\n" }})
      .collect(Collectors.toMap(data -> (String) data[0], data -> (String) data[1]));
 
-static int myArray[] = { 1, 2, 3, 4, 5 };
-
-  //TODO map.of etc
-  // TODO init de map
-
+ 
   public static void main(String[] args) {
 
-    System.out.println("tree_path");
     /* MAP and entry formatting */
     // split entry with space separator
     Scanner in = new Scanner(System.in);
@@ -52,27 +57,35 @@ static int myArray[] = { 1, 2, 3, 4, 5 };
     System.err.println(myMap.toString());
     myMap.forEach((k, v) -> System.err.println(" key : " + k + " value : " + v));
 
-  /*  operations on collection */
-
-    // sort
+    /*  operations on collection */
+    // sort, find the minumum
     IntStream.of(14, 35, -7, 46, 98).min();
-    Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare);
-    Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min);
+    Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min);    
+    Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare);    
     Collections.min(Arrays.asList(14, 35, -7, 46, 98));
-    
 
     
-    // filter
-    // Filter list of numbers, return Map with Collectors.partitioningBy
-    Map<Boolean, List<Integer>> passedFailedMap = Stream.of(49, 58, 76, 82, 88, 90)
-        .collect(Collectors.partitioningBy(i -> i > 60));
+    /*.filter(Text.class::isInstance)
+.map(Text.class::cast)
+.forEach(childrenToRemove::add);
+Instead of for-each-add, you can collect stream items with Collectors.toSet():
+Set<Text> childrenToRemove = group.getChildren()*/
+    // ...
+    .collect(Collectors.toSet());
+    
+    //TODO mettre la somme du code4Life
+
+    
+    // filters
+    // filter list of numbers, return Map with Collectors.partitioningBy
+    Map<Boolean, List<Integer>> passedFailedMap = Stream.of(49, 58, 76, 82, 88, 90).collect(Collectors.partitioningBy(i -> i > 60));
 
     //filtrer par objets non null
     String resultat = Stream.of( null, null, "valeur defaut").filter( Objects::nonNull ).findFirst().get();
     
-  /* String, characters */
+    /* String, characters */
 
-  //stringMatch compliqué
+    //stringMatch compliqué TODO 
     
     // init from A to Z
     Stream.iterate('a', i -> ++i).limit(26).forEach(System.out::println);
@@ -86,8 +99,8 @@ static int myArray[] = { 1, 2, 3, 4, 5 };
     System.out.println("stringABC :"+stringABC.repeat(count));
     //TODO mettre un assert
 
-   int charNb = 3;
-  String answer = "";
+    int charNb = 3;
+    String answer = "";
     // TODO faire la translation map
      //IntStream.rangeClosed(1, charNb).forEach(i -> answer += translationMap.getOrDefault(seq,seq));
 
@@ -108,7 +121,8 @@ static int myArray[] = { 1, 2, 3, 4, 5 };
     String tweet = "This is an example tweet talking about java and maven.";
     wordList.stream().anyMatch(tweet::contains);
 
-//Occurence d'une séquence dans une string
+    //mettre dans une fonction 
+    //Occurence d'une séquence dans une string
     //Il est aussi possible de faire un découpage avec split pour y aller mot à mot
     String str = "helloslkhellodjladfjhello";
     String findStr = "hello";
@@ -147,15 +161,7 @@ Private  constructor(){
 throw new AssertionError("should never be instancied");
 }*/
 /*
-.filter(Text.class::isInstance)
-.map(Text.class::cast)
-.forEach(childrenToRemove::add);
-Instead of for-each-add, you can collect stream items with Collectors.toSet():
-Set<Text> childrenToRemove = group.getChildren()
-    // ...
-    .collect(Collectors.toSet());
 
-Instead of using AN ANONYMOUS CLASS you can use A LAMBDA EXPRESSION
-And if this just calls one method, you can use
-A METHOD REFERENCE mais c'est juste du sucre syntaxique?
-DSL comme sucre syntaxique?*/
+
+
+
