@@ -40,3 +40,33 @@ public enum Blah {
 throw new IllegalArgumentException(v.toString());
     }
 }
+
+/* Domain class for player. */
+enum PlayerType {
+    Me(1),
+    Enemy(2);
+
+    private int nb;
+
+    PlayerType(int nbParam) {
+        this.nb = nbParam;
+    }
+
+    public int getNb() {
+        return this.nb;
+    }
+
+    /*
+     * car le PlayerType.valueOf est sensible à la casse mais est ce que cela ne
+     * fonctionne
+     * qu'avec Me, Enemy ?
+     */
+    public static PlayerType fromInt(int nb) {
+        for (PlayerType p : PlayerType.values()) {
+            if (p.nb == nb) {
+                return p;
+            }
+        }
+        throw new IllegalArgumentException(String.valueOf(nb));
+    }
+}
