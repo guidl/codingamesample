@@ -25,6 +25,14 @@ public enum Color {
         // Alternatively, you can compare based on names: 
         // return c1.name().compareTo(c2.name());
     }
+
+    public static Color getStationFromOrdinal(int ordinalFromMsg){ 
+        for(Color s :Color.values()){
+            if(s.ordinal() == ordinalFromMsg){
+                return s;
+            } 
+        }
+    }
 }
 
 public class EnumExample {
